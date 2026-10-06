@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tài Liệu Kỹ Thuật An Toàn - Bậc 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      background: #fef3c7;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .search-box {
+      margin-bottom: 25px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.2s;
+      background: #ffffff;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+    }
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .file-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .file-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      border-color: var(--primary);
+    }
+
+    .file-card .icon {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .file-card h3 {
+      font-size: 1rem;
+      color: var(--text-main);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .file-card .footer-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      border-top: 1px dashed var(--border);
+      padding-top: 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">Đại Cương An Toàn Kỹ Thuật</span>
+      <h1>Tài Liệu Thi Giữ Bậc 3 - An Toàn</h1>
+      <p class="subtitle">Quy trình công tác an toàn, biện pháp kỹ thuật và xử lý thiết bị</p>
+    </header>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔍 Gõ từ khóa để tìm quy trình, biện pháp an toàn...">
+    </div>
+
+    <div class="file-grid" id="cardList">
+      <a href="An toàn khi làm việc tại khu vực máy phát làm mát bằng hydro.html" class="file-card">
+        <div>
+          <div class="icon">⚡</div>
+          <h3>An toàn khi làm việc tại khu vực máy phát làm mát bằng hydro</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="Biện pháp kỹ thuật về an toàn trước khi thực hiện công việc.html" class="file-card">
+        <div>
+          <div class="icon">🛡️</div>
+          <h3>Biện pháp kỹ thuật về an toàn trước khi thực hiện công việc</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="Các yêu cầu về việc cách ly an toàn thiết bị và bàn giao.html" class="file-card">
+        <div>
+          <div class="icon">🔒</div>
+          <h3>Các yêu cầu về việc cách ly an toàn thiết bị và bàn giao</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="Quy định về An toàn khi làm việc bên trong buồng lửa lò hơi.html" class="file-card">
+        <div>
+          <div class="icon">🔥</div>
+          <h3>Quy định về an toàn khi làm việc bên trong buồng lửa lò hơi</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="Quy định về an toàn khi làm việc trên đường ống áp lực.html" class="file-card">
+        <div>
+          <div class="icon">⚠️</div>
+          <h3>Quy định về an toàn khi làm việc trên đường ống áp lực</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="Quy định về an toàn khi làm việc với thiết bị quay.html" class="file-card">
+        <div>
+          <div class="icon">🔄</div>
+          <h3>Quy định về an toàn khi làm việc với thiết bị quay</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="Quy định về an toàn khi vận hành lò hơi và Quạt khói.html" class="file-card">
+        <div>
+          <div class="icon">🏭</div>
+          <h3>Quy định về an toàn khi vận hành lò hơi và quạt khói</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="Quy định về an toàn trong không gian hạn chế.html" class="file-card">
+        <div>
+          <div class="icon">🚪</div>
+          <h3>Quy định về an toàn trong không gian hạn chế</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="Thủ tục Cho phép làm việc và bàn giao tại hiện trường.html" class="file-card">
+        <div>
+          <div class="icon">📋</div>
+          <h3>Thủ tục cho phép làm việc và bàn giao tại hiện trường</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="Trách nhiệm của người cho phép và người Chỉ huy trực tiếp.html" class="file-card">
+        <div>
+          <div class="icon">👷</div>
+          <h3>Trách nhiệm của người cho phép và người chỉ huy trực tiếp</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="các qui định về an toàn khi lặn.html" class="file-card">
+        <div>
+          <div class="icon">🤿</div>
+          <h3>Các quy định về an toàn khi lặn</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <a href="quy định về an toàn khi làm việc trên cao.html" class="file-card">
+        <div>
+          <div class="icon">🪜</div>
+          <h3>Quy định về an toàn khi làm việc trên cao</h3>
+        </div>
+        <div class="footer-info">
+          <span>Xem tài liệu</span>
+          <span>→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.file-card');
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
