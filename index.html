@@ -68,7 +68,7 @@
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.2s;
-      text-decoration: none;
+      cursor: pointer;
       color: inherit;
     }
 
@@ -99,11 +99,57 @@
     }
 
     .hidden { display: none !important; }
+
+    /* Khung hiển thị nội dung trực tiếp (Viewer Overlay) */
+    #docViewer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #ffffff;
+      z-index: 99999;
+      flex-direction: column;
+    }
+
+    .viewer-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .btn-close {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    .btn-close:hover {
+      background: var(--primary-dark);
+    }
+
+    #viewerFrame {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <div class="container" id="mainContainer">
     <header>
       <span class="badge">Đại Cương An Toàn Kỹ Thuật</span>
       <h1>Tài Liệu Thi Giữ Bậc 3 - An Toàn</h1>
@@ -115,131 +161,80 @@
     </div>
 
     <div class="file-grid" id="cardList">
-      <!-- 1: Khớp chữ 'khíhydro.html' viết liền theo danh sách repo -->
-      <a href="An toàn khi làm việc tại khu vực máy phát làm mát bằng khíhydro.html" class="file-card">
-        <div>
-          <div class="icon">⚡</div>
-          <h3>An toàn khi làm việc tại khu vực máy phát làm mát bằng khí hydro</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('An toàn khi làm việc tại khu vực máy phát làm mát bằng khíhydro.html', 'An toàn máy phát làm mát bằng khí hydro')">
+        <div><div class="icon">⚡</div><h3>An toàn khi làm việc tại khu vực máy phát làm mát bằng khí hydro</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 2 -->
-      <a href="Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác.html" class="file-card">
-        <div>
-          <div class="icon">🛡️</div>
-          <h3>Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác.html', 'Biện pháp kỹ thuật về an toàn')">
+        <div><div class="icon">🛡️</div><h3>Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 3 -->
-      <a href="Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành.html" class="file-card">
-        <div>
-          <div class="icon">🔒</div>
-          <h3>Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành.html', 'Cách ly an toàn thiết bị')">
+        <div><div class="icon">🔒</div><h3>Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 4 -->
-      <a href="Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói.html" class="file-card">
-        <div>
-          <div class="icon">🔥</div>
-          <h3>Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói.html', 'Làm việc bên trong buồng đốt và đường khói')">
+        <div><div class="icon">🔥</div><h3>Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 5 -->
-      <a href="Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn.html" class="file-card">
-        <div>
-          <div class="icon">🌊</div>
-          <h3>Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn.html', 'Làm việc trên đường ống nước tuần hoàn')">
+        <div><div class="icon">🌊</div><h3>Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 6 -->
-      <a href="Quy định về an toàn khi làm việc với thiết bị quay.html" class="file-card">
-        <div>
-          <div class="icon">🔄</div>
-          <h3>Quy định về an toàn khi làm việc với thiết bị quay</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về an toàn khi làm việc với thiết bị quay.html', 'Làm việc với thiết bị quay')">
+        <div><div class="icon">🔄</div><h3>Quy định về an toàn khi làm việc với thiết bị quay</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 7 -->
-      <a href="Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi.html" class="file-card">
-        <div>
-          <div class="icon">🚪</div>
-          <h3>Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi.html', 'An toàn khi làm việc trong bao hơi')">
+        <div><div class="icon">🚪</div><h3>Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 8 -->
-      <a href="Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi.html" class="file-card">
-        <div>
-          <div class="icon">🏭</div>
-          <h3>Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi.html', 'An toàn vận hành lò hơi & thổi bụi')">
+        <div><div class="icon">🏭</div><h3>Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 9 -->
-      <a href="Thủ tục bàn giao theo PCT AT thực hiện công tác.html" class="file-card">
-        <div>
-          <div class="icon">📋</div>
-          <h3>Thủ tục bàn giao theo PCT AT thực hiện công tác</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Thủ tục bàn giao theo PCT AT thực hiện công tác.html', 'Thủ tục bàn giao theo PCT')">
+        <div><div class="icon">📋</div><h3>Thủ tục bàn giao theo PCT AT thực hiện công tác</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 10 -->
-      <a href="Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT.html" class="file-card">
-        <div>
-          <div class="icon">👷</div>
-          <h3>Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT.html', 'Trách nhiệm người cho phép & CHTT')">
+        <div><div class="icon">👷</div><h3>Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 11 -->
-      <a href="các qui định về an toàn khi lặn.html" class="file-card">
-        <div>
-          <div class="icon">🤿</div>
-          <h3>Các qui định về an toàn khi lặn</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('các qui định về an toàn khi lặn.html', 'Quy định an toàn khi lặn')">
+        <div><div class="icon">🤿</div><h3>Các qui định về an toàn khi lặn</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
-      <!-- 12 -->
-      <a href="quy định về an toàn khi làm việc trên cao.html" class="file-card">
-        <div>
-          <div class="icon">🪜</div>
-          <h3>Quy định về an toàn khi làm việc trên cao</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('quy định về an toàn khi làm việc trên cao.html', 'An toàn làm việc trên cao')">
+        <div><div class="icon">🪜</div><h3>Quy định về an toàn khi làm việc trên cao</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
     </div>
   </div>
 
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.file-card');
+  <!-- Khung đọc Viewer -->
+  <div id="docViewer">
+    <div class="viewer-header">
+      <button class="btn-close" onclick="closeDoc()">← Quay lại danh mục</button>
+      <span id="docTitle" style="font-weight: 600; font-size: 0.95rem; color: #1e293b;"></span>
+      <div style="width: 120px;"></div>
+    </div>
+    <iframe id="viewerFrame" src=""></iframe>
+  </div>
 
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase().trim();
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        if (text.includes(query)) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+  <script>
+    function openDoc(url, title) {
+      document.getElementById('viewerFrame').src = url;
+      document.getElementById('docTitle').textContent = title;
+      document.getElementById('docViewer').style
