@@ -1,164 +1,59 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tài Liệu Kỹ Thuật An Toàn - Bậc 3</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #d97706;
-      --primary-dark: #b45309;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
+<!-- BẮT ĐẦU: NÚT QUAY LẠI TRANG CHÍNH -->
+<a href="index.html" class="btn-back-home" title="Quay lại danh mục An Toàn">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline>
+  </svg>
+  <span>Trang chủ</span>
+</a>
+
+<style>
+  .btn-back-home {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 99999;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    background-color: #d97706; /* Màu cam an toàn kỹ thuật */
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+  }
+
+  .btn-back-home:hover {
+    background-color: #b45309;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.5);
+  }
+
+  .btn-back-home:active {
+    transform: translateY(0);
+  }
+
+  /* Tự thu gọn trên màn hình điện thoại để không che khuất chữ */
+  @media (max-width: 600px) {
+    .btn-back-home {
+      top: 12px;
+      left: 12px;
+      padding: 7px 12px;
+      font-size: 13px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: var(--bg); color: var(--text-main); padding: 30px 20px; }
-    .container { max-width: 1050px; margin: 0 auto; }
-    header { text-align: center; margin-bottom: 25px; }
-    .badge {
-      display: inline-block; padding: 6px 14px; font-size: 0.85rem; font-weight: 600;
-      color: var(--primary-dark); background: #fef3c7; border-radius: 999px;
-      margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  /* Ẩn khi bấm in tài liệu ra giấy */
+  @media print {
+    .btn-back-home {
+      display: none !important;
     }
-    h1 { font-size: 2rem; color: var(--text-main); margin-bottom: 8px; }
-    p.subtitle { color: var(--text-muted); font-size: 1rem; }
-    .search-box { margin-bottom: 25px; }
-    .search-box input {
-      width: 100%; padding: 14px 18px; font-size: 1rem; border: 1px solid var(--border);
-      border-radius: 10px; outline: none; transition: all 0.2s; background: #ffffff;
-    }
-    .search-box input:focus {
-      border-color: var(--primary); box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
-    }
-    .file-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;
-    }
-    .file-card {
-      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
-      padding: 18px; display: flex; flex-direction: column; justify-content: space-between;
-      transition: all 0.2s; text-decoration: none; color: inherit;
-    }
-    .file-card:hover {
-      transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); border-color: var(--primary);
-    }
-    .file-card .icon { font-size: 1.5rem; margin-bottom: 10px; }
-    .file-card h3 {
-      font-size: 0.95rem; font-weight: 600; color: var(--text-main); line-height: 1.45; margin-bottom: 12px;
-    }
-    .file-card .footer-info {
-      display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;
-      font-weight: 600; color: var(--primary); border-top: 1px dashed var(--border); padding-top: 10px;
-    }
-    .hidden { display: none !important; }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <header>
-      <span class="badge">Đại Cương An Toàn Kỹ Thuật</span>
-      <h1>Tài Liệu Thi Giữ Bậc 3 - An Toàn</h1>
-      <p class="subtitle">Tra cứu các quy trình công tác an toàn, phiếu thao tác và biện pháp hiện trường</p>
-    </header>
-
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="🔍 Gõ từ khóa để tìm quy trình, thiết bị...">
-    </div>
-
-    <div class="file-grid" id="cardList">
-      <!-- 1 -->
-      <a href="An toàn khi làm việc tại khu vực máy phát làm mát bằng khíhydro.html" class="file-card">
-        <div><div class="icon">⚡</div><h3>An toàn khi làm việc tại khu vực máy phát làm mát bằng khí hydro</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 2 -->
-      <a href="Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác.html" class="file-card">
-        <div><div class="icon">🛡️</div><h3>Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 3 -->
-      <a href="Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành.html" class="file-card">
-        <div><div class="icon">🔒</div><h3>Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 4 -->
-      <a href="Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói.html" class="file-card">
-        <div><div class="icon">🔥</div><h3>Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 5 -->
-      <a href="Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn.html" class="file-card">
-        <div><div class="icon">🌊</div><h3>Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 6 -->
-      <a href="Quy định về an toàn khi làm việc với thiết bị quay.html" class="file-card">
-        <div><div class="icon">🔄</div><h3>Quy định về an toàn khi làm việc với thiết bị quay</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 7 -->
-      <a href="Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi.html" class="file-card">
-        <div><div class="icon">🚪</div><h3>Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 8 -->
-      <a href="Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi.html" class="file-card">
-        <div><div class="icon">🏭</div><h3>Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 9 -->
-      <a href="Thủ tục bàn giao theo PCT AT thực hiện công tác.html" class="file-card">
-        <div><div class="icon">📋</div><h3>Thủ tục bàn giao theo PCT AT thực hiện công tác</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 10 -->
-      <a href="Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT.html" class="file-card">
-        <div><div class="icon">👷</div><h3>Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 11 -->
-      <a href="các qui định về an toàn khi lặn.html" class="file-card">
-        <div><div class="icon">🤿</div><h3>Các qui định về an toàn khi lặn</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-
-      <!-- 12 -->
-      <a href="quy định về an toàn khi làm việc trên cao.html" class="file-card">
-        <div><div class="icon">🪜</div><h3>Quy định về an toàn khi làm việc trên cao</h3></div>
-        <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
-    </div>
-  </div>
-
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.file-card');
-
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase().trim();
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        if (text.includes(query)) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+  }
+</style>
+<!-- KẾT THÚC: NÚT QUAY LẠI TRANG CHÍNH -->
