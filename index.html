@@ -15,141 +15,50 @@
       --text-muted: #64748b;
       --border: #e2e8f0;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
     body { background-color: var(--bg); color: var(--text-main); padding: 30px 20px; }
     .container { max-width: 1050px; margin: 0 auto; }
     header { text-align: center; margin-bottom: 25px; }
-
     .badge {
-      display: inline-block;
-      padding: 6px 14px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary-dark);
-      background: #fef3c7;
-      border-radius: 999px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      display: inline-block; padding: 6px 14px; font-size: 0.85rem; font-weight: 600;
+      color: var(--primary-dark); background: #fef3c7; border-radius: 999px;
+      margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;
     }
-
     h1 { font-size: 2rem; color: var(--text-main); margin-bottom: 8px; }
     p.subtitle { color: var(--text-muted); font-size: 1rem; }
-
     .search-box { margin-bottom: 25px; }
     .search-box input {
-      width: 100%;
-      padding: 14px 18px;
-      font-size: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      outline: none;
-      transition: all 0.2s;
-      background: #ffffff;
+      width: 100%; padding: 14px 18px; font-size: 1rem; border: 1px solid var(--border);
+      border-radius: 10px; outline: none; transition: all 0.2s; background: #ffffff;
     }
     .search-box input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+      border-color: var(--primary); box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
     }
-
     .file-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;
     }
-
     .file-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.2s;
-      cursor: pointer;
-      color: inherit;
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px; display: flex; flex-direction: column; justify-content: space-between;
+      transition: all 0.2s; text-decoration: none; color: inherit;
     }
-
     .file-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-      border-color: var(--primary);
+      transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); border-color: var(--primary);
     }
-
     .file-card .icon { font-size: 1.5rem; margin-bottom: 10px; }
     .file-card h3 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-main);
-      line-height: 1.45;
-      margin-bottom: 12px;
+      font-size: 0.95rem; font-weight: 600; color: var(--text-main); line-height: 1.45; margin-bottom: 12px;
     }
-
     .file-card .footer-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary);
-      border-top: 1px dashed var(--border);
-      padding-top: 10px;
+      display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;
+      font-weight: 600; color: var(--primary); border-top: 1px dashed var(--border); padding-top: 10px;
     }
-
     .hidden { display: none !important; }
-
-    /* Khung hiển thị nội dung trực tiếp (Viewer Overlay) */
-    #docViewer {
-      display: none;
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #ffffff;
-      z-index: 99999;
-      flex-direction: column;
-    }
-
-    .viewer-header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-    }
-
-    .btn-close {
-      background: var(--primary);
-      color: #ffffff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.9rem;
-    }
-
-    .btn-close:hover {
-      background: var(--primary-dark);
-    }
-
-    #viewerFrame {
-      flex: 1;
-      width: 100%;
-      border: none;
-    }
   </style>
 </head>
 <body>
 
-  <div class="container" id="mainContainer">
+  <div class="container">
     <header>
       <span class="badge">Đại Cương An Toàn Kỹ Thuật</span>
       <h1>Tài Liệu Thi Giữ Bậc 3 - An Toàn</h1>
@@ -157,85 +66,99 @@
     </header>
 
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm quy trình, bao hơi, máy phát, PCT...">
+      <input type="text" id="searchInput" placeholder="🔍 Gõ từ khóa để tìm quy trình, thiết bị...">
     </div>
 
     <div class="file-grid" id="cardList">
-      <div class="file-card" onclick="openDoc('An toàn khi làm việc tại khu vực máy phát làm mát bằng khíhydro.html', 'An toàn máy phát làm mát bằng khí hydro')">
+      <!-- 1 -->
+      <a href="An toàn khi làm việc tại khu vực máy phát làm mát bằng khíhydro.html" class="file-card">
         <div><div class="icon">⚡</div><h3>An toàn khi làm việc tại khu vực máy phát làm mát bằng khí hydro</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác.html', 'Biện pháp kỹ thuật về an toàn')">
+      <!-- 2 -->
+      <a href="Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác.html" class="file-card">
         <div><div class="icon">🛡️</div><h3>Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành.html', 'Cách ly an toàn thiết bị')">
+      <!-- 3 -->
+      <a href="Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành.html" class="file-card">
         <div><div class="icon">🔒</div><h3>Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói.html', 'Làm việc bên trong buồng đốt và đường khói')">
+      <!-- 4 -->
+      <a href="Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói.html" class="file-card">
         <div><div class="icon">🔥</div><h3>Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn.html', 'Làm việc trên đường ống nước tuần hoàn')">
+      <!-- 5 -->
+      <a href="Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn.html" class="file-card">
         <div><div class="icon">🌊</div><h3>Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('Quy định về an toàn khi làm việc với thiết bị quay.html', 'Làm việc với thiết bị quay')">
+      <!-- 6 -->
+      <a href="Quy định về an toàn khi làm việc với thiết bị quay.html" class="file-card">
         <div><div class="icon">🔄</div><h3>Quy định về an toàn khi làm việc với thiết bị quay</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi.html', 'An toàn khi làm việc trong bao hơi')">
+      <!-- 7 -->
+      <a href="Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi.html" class="file-card">
         <div><div class="icon">🚪</div><h3>Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi.html', 'An toàn vận hành lò hơi & thổi bụi')">
+      <!-- 8 -->
+      <a href="Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi.html" class="file-card">
         <div><div class="icon">🏭</div><h3>Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('Thủ tục bàn giao theo PCT AT thực hiện công tác.html', 'Thủ tục bàn giao theo PCT')">
+      <!-- 9 -->
+      <a href="Thủ tục bàn giao theo PCT AT thực hiện công tác.html" class="file-card">
         <div><div class="icon">📋</div><h3>Thủ tục bàn giao theo PCT AT thực hiện công tác</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT.html', 'Trách nhiệm người cho phép & CHTT')">
+      <!-- 10 -->
+      <a href="Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT.html" class="file-card">
         <div><div class="icon">👷</div><h3>Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('các qui định về an toàn khi lặn.html', 'Quy định an toàn khi lặn')">
+      <!-- 11 -->
+      <a href="các qui định về an toàn khi lặn.html" class="file-card">
         <div><div class="icon">🤿</div><h3>Các qui định về an toàn khi lặn</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
 
-      <div class="file-card" onclick="openDoc('quy định về an toàn khi làm việc trên cao.html', 'An toàn làm việc trên cao')">
+      <!-- 12 -->
+      <a href="quy định về an toàn khi làm việc trên cao.html" class="file-card">
         <div><div class="icon">🪜</div><h3>Quy định về an toàn khi làm việc trên cao</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </div>
+      </a>
     </div>
-  </div>
-
-  <!-- Khung đọc Viewer -->
-  <div id="docViewer">
-    <div class="viewer-header">
-      <button class="btn-close" onclick="closeDoc()">← Quay lại danh mục</button>
-      <span id="docTitle" style="font-weight: 600; font-size: 0.95rem; color: #1e293b;"></span>
-      <div style="width: 120px;"></div>
-    </div>
-    <iframe id="viewerFrame" src=""></iframe>
   </div>
 
   <script>
-    function openDoc(url, title) {
-      document.getElementById('viewerFrame').src = url;
-      document.getElementById('docTitle').textContent = title;
-      document.getElementById('docViewer').style
- 
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.file-card');
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
