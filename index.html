@@ -11,7 +11,7 @@
       --primary-dark: #b45309;
       --text-main: #0f172a;
       --text-muted: #475569;
-      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-bg: rgba(255, 255, 255, 0.94);
       --card-border: rgba(226, 232, 240, 0.9);
     }
 
@@ -24,14 +24,14 @@
       /* Nền hoa văn lưới kỹ thuật công nghiệp */
       background-color: #f1f5f9;
       background-image: 
-        radial-gradient(at 0% 0%, rgba(217, 119, 6, 0.08) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.05) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, rgba(217, 119, 6, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.06) 0px, transparent 50%),
         radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
       background-size: 100% 100%, 100% 100%, 24px 24px;
       position: relative;
     }
 
-    /* Dải sọc phản quang an toàn (Safety Chevron Tape) trên cùng */
+    /* Dải sọc phản quang an toàn (Safety Chevron Tape) */
     .safety-stripe {
       height: 8px;
       width: 100%;
@@ -54,11 +54,11 @@
     /* Banner tiêu đề phong cách an toàn công trình */
     header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(254,243,199,0.5));
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      border: 1px solid rgba(245, 158, 11, 0.35);
       border-radius: 16px;
-      padding: 30px 20px;
+      padding: 28px 20px;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
       backdrop-filter: blur(8px);
     }
@@ -74,7 +74,7 @@
       background: #fde68a;
       border: 1px solid #f59e0b;
       border-radius: 999px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
@@ -95,7 +95,7 @@
 
     /* Thanh tìm kiếm */
     .search-box {
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .search-box input {
@@ -126,14 +126,14 @@
     .file-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-left: 4px solid var(--primary);
+      border-left: 5px solid var(--primary);
       border-radius: 12px;
       padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.25s ease;
-      text-decoration: none;
+      cursor: pointer;
       color: inherit;
       backdrop-filter: blur(6px);
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
@@ -141,9 +141,9 @@
 
     .file-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 24px -4px rgba(217, 119, 6, 0.18);
+      box-shadow: 0 12px 24px -4px rgba(217, 119, 6, 0.2);
       border-color: var(--primary);
-      border-left-width: 6px;
+      border-left-width: 7px;
       background: #ffffff;
     }
 
@@ -178,6 +178,55 @@
     }
 
     .hidden { display: none !important; }
+
+    /* Khung Viewer mở bài đọc kèm nút BACK tự động */
+    #docViewer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #ffffff;
+      z-index: 999999;
+      flex-direction: column;
+    }
+
+    .viewer-header {
+      background: #ffffff;
+      border-bottom: 2px solid #e2e8f0;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-back-home:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    #viewerFrame {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
   </style>
 </head>
 <body>
@@ -185,7 +234,7 @@
   <!-- Dải băng sọc an toàn kỹ thuật -->
   <div class="safety-stripe"></div>
 
-  <div class="container">
+  <div class="container" id="mainContainer">
     <header>
       <div class="badge">
         <span>⚠️</span> QUY CHUẨN AN TOÀN LAO ĐỘNG
@@ -200,116 +249,111 @@
 
     <div class="file-grid" id="cardList">
       <!-- 1 -->
-      <a href="An toàn khi làm việc tại khu vực máy phát làm mát bằng khíhydro.html" class="file-card">
-        <div>
-          <div class="icon">⚡</div>
-          <h3>An toàn khi làm việc tại khu vực máy phát làm mát bằng khí hydro</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('An toàn khi làm việc tại khu vực máy phát làm mát bằng khíhydro.html', 'An toàn máy phát làm mát bằng khí hydro')">
+        <div><div class="icon">⚡</div><h3>An toàn khi làm việc tại khu vực máy phát làm mát bằng khí hydro</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 2 -->
-      <a href="Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác.html" class="file-card">
-        <div>
-          <div class="icon">🛡️</div>
-          <h3>Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác.html', 'Biện pháp kỹ thuật về an toàn')">
+        <div><div class="icon">🛡️</div><h3>Biện pháp kỹ thuật về an toàn trước khi thực hiện công tác</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 3 -->
-      <a href="Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành.html" class="file-card">
-        <div>
-          <div class="icon">🔒</div>
-          <h3>Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành.html', 'Cách ly an toàn thiết bị')">
+        <div><div class="icon">🔒</div><h3>Các yêu cầu về việc cách ly an toàn thiết bị và Kiểm tra thiết bị đã cách ly khỏi vận hành</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 4 -->
-      <a href="Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói.html" class="file-card">
-        <div>
-          <div class="icon">🔥</div>
-          <h3>Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói.html', 'Làm việc bên trong buồng đốt và đường khói')">
+        <div><div class="icon">🔥</div><h3>Quy định về An toàn khi làm việc bên trong buồng đốt và đường khói</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 5 -->
-      <a href="Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn.html" class="file-card">
-        <div>
-          <div class="icon">🌊</div>
-          <h3>Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn.html', 'Làm việc trên đường ống nước tuần hoàn')">
+        <div><div class="icon">🌊</div><h3>Quy định về an toàn khi làm việc trên đường ống nước tuần hoàn</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 6 -->
-      <a href="Quy định về an toàn khi làm việc với thiết bị quay.html" class="file-card">
-        <div>
-          <div class="icon">🔄</div>
-          <h3>Quy định về an toàn khi làm việc với thiết bị quay</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về an toàn khi làm việc với thiết bị quay.html', 'Làm việc với thiết bị quay')">
+        <div><div class="icon">🔄</div><h3>Quy định về an toàn khi làm việc với thiết bị quay</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 7 -->
-      <a href="Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi.html" class="file-card">
-        <div>
-          <div class="icon">🚪</div>
-          <h3>Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi.html', 'An toàn khi làm việc trong bao hơi')">
+        <div><div class="icon">🚪</div><h3>Quy định về an toàn trong không hạn chế, an toàn khi làm việc bao hơi</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 8 -->
-      <a href="Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi.html" class="file-card">
-        <div>
-          <div class="icon">🏭</div>
-          <h3>Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi.html', 'An toàn vận hành lò hơi & thổi bụi')">
+        <div><div class="icon">🏭</div><h3>Quy định về an toàn vận hành lò hơi, Quy định về an toàn trong thổi bụi</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 9 -->
-      <a href="Thủ tục bàn giao theo PCT AT thực hiện công tác.html" class="file-card">
-        <div>
-          <div class="icon">📋</div>
-          <h3>Thủ tục bàn giao theo PCT AT thực hiện công tác</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Thủ tục bàn giao theo PCT AT thực hiện công tác.html', 'Thủ tục bàn giao theo PCT')">
+        <div><div class="icon">📋</div><h3>Thủ tục bàn giao theo PCT AT thực hiện công tác</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 10 -->
-      <a href="Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT.html" class="file-card">
-        <div>
-          <div class="icon">👷</div>
-          <h3>Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT.html', 'Trách nhiệm người cho phép & CHTT')">
+        <div><div class="icon">👷</div><h3>Trách nhiệm của người cho phép và người Chỉ huy trực tiếp trong PCT</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 11 -->
-      <a href="các qui định về an toàn khi lặn.html" class="file-card">
-        <div>
-          <div class="icon">🤿</div>
-          <h3>Các qui định về an toàn khi lặn</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('các qui định về an toàn khi lặn.html', 'Quy định an toàn khi lặn')">
+        <div><div class="icon">🤿</div><h3>Các qui định về an toàn khi lặn</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
 
       <!-- 12 -->
-      <a href="quy định về an toàn khi làm việc trên cao.html" class="file-card">
-        <div>
-          <div class="icon">🪜</div>
-          <h3>Quy định về an toàn khi làm việc trên cao</h3>
-        </div>
+      <div class="file-card" onclick="openDoc('quy định về an toàn khi làm việc trên cao.html', 'An toàn làm việc trên cao')">
+        <div><div class="icon">🪜</div><h3>Quy định về an toàn khi làm việc trên cao</h3></div>
         <div class="footer-info"><span>Xem chi tiết</span><span>→</span></div>
-      </a>
+      </div>
     </div>
   </div>
 
+  <!-- Khung đọc bài viết có sẵn nút Back -->
+  <div id="docViewer">
+    <div class="viewer-header">
+      <button class="btn-back-home" onclick="closeDoc()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Quay lại danh mục</span>
+      </button>
+      <span id="docTitle" style="font-weight: 700; font-size: 1rem; color: #1e293b;"></span>
+      <div style="width: 140px;"></div>
+    </div>
+    <iframe id="viewerFrame" src=""></iframe>
+  </div>
+
   <script>
+    // Hàm mở bài đọc kèm thanh điều hướng
+    function openDoc(url, title) {
+      document.getElementById('viewerFrame').src = url;
+      document.getElementById('docTitle').textContent = title;
+      document.getElementById('docViewer').style.display = 'flex';
+      window.scrollTo(0, 0);
+    }
+
+    // Hàm quay lại danh mục trang chủ
+    function closeDoc() {
+      document.getElementById('docViewer').style.display = 'none';
+      document.getElementById('viewerFrame').src = '';
+    }
+
+    // Tìm kiếm nhanh
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.file-card');
 
